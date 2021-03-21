@@ -11,32 +11,35 @@
 <body>
   <div class="wrapper">
     <div class="container">
+      <div id="start-screen">
       <h1>Coding Quiz Challenge</h1>
-      <p>Test your JavaScript skills with this mini Coding Quiz Challenge.</p> 
-      <p>10 questions only with a 45 seconds time limit to keep you moving.</p> 
-      <p>You will receive 1 point for each correct answer.</p>
-      <p>At the end of the Quiz, your total score will be displayed and 
-        you can record your initials if you receive a high score.</p>
-      <p>The maximum score is 10 points.</p>
-      <button id="start">Start quiz</button>
-      <div id="quiz"></div>
-
-      <div class="timer hide">Time left: <span id="time">10</span></div>
+      <span id="content1" class="content">Test your JavaScript skills with this mini Coding Quiz Challenge.</span>
+      <span id="content2" class="content">10 questions only with a 30-second time limit to keep you moving.</span>
+      <span id="content3" class="content">Click on the box showing your chosen answer.  You will receive 1 point for each correct answer.</span>
+      <span id="content4" class="content">At the end of the Quiz, your total score will be displayed and you can record your initials if you receive a high score.</span>
+      <span id="content5" class="content">The maximum score is 10 points.</span>
+      <span id="content6" class="content">Good luck!</span>
+      <br>
       
+      <button id="start">Start quiz</button>
+      </div>
     
         <form method="multiple-choice">
-          <div>
-            <!-- <div id="question-text"></div> -->
-            <!-- <input type="checkbox" class="btn-check" id="answer-choices"> -->
-            <!-- <label class="btn btn-outline-secondary" for="btn-check-2-outlined">"answers"</label><br> -->
-            <!-- <input type=onclick/> -->
-            <div id="result-feedback"></div> <!-- new -->
+          <div id="question-screen" class="hide">
+            <div id="question-box"></div>
+            <div class="timer hide">Time left: <span id="time">10</span></div>
+            <div id="question-text"></div>
+            <div id="answers-text" class="button" class="hide">
+            <div id="result-feedback"></div>
+            </div>
           </div>
-
-          <div id="msg"></div>
-          <div class="results" class="hide"></div>
         </form>
 
+        <div id="results-screen" class="hide">
+          <div id="score"></div>
+          <div id="msg"></div>
+        </div>
+      
     </div>
   </div>
 

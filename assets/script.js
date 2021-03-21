@@ -1,24 +1,88 @@
-// Define variables:
+// Remove some of these variables if they are not needed:
 var startButton = document.getElementById("start");
-var quizQuestions = document.getElementById("quiz");
+var questionText = document.querySelector("#question-text");
+var answerChoices = document.querySelector("#answers-text");
+var feedback = document.getElementById("msg");
 var timerEl = document.querySelector(".timer");
-var secondsLeft = 10;
-// Change timer to begin at 45 seconds (or other time interval) at the end
+var questionCounter = 0;
+var secondsLeft = 30;
+
+var question = "";
+var currentQuestionIndex = 0;
+var questionCounter;
+var questionBox = document.querySelector("#question-box");
+var choices = [];
+
+var correctAnswer;
+var chosenAnswer = document.querySelector(".chosen-answer");
+var startScreen = document.getElementById("start-screen");
+var questionScreen = document.getElementById("question-screen");
+var resultsScreen = document.getElementById("results-screen");
+var score = document.getElementById("score");
 
 
-// When I open the website, I am presented with:
-//   - a heading 
-//   - & short paragraph about the multiple choice quiz (10 questions) & the time allocated (45 seconds?)
-//   - a start button
-// WHEN I am ready to start, I click the start button
-// THEN a timer starts & I am presented with the first question
+var quizQuestions = [
+    {
+      question: "Arrays in JavaScript can be used to store?",
+      choices: ["Numbers & Strings", "Booleans", "Other arrays", "All of the above"],
+      correctAnswer: "All of the above"
+    },
+    {
+      question: "Commonly used data types DO NOT include?",
+      choices: ["Strings", "Booleans", "Alerts", "Numbers"],
+      correctAnswer: "Alerts"
+    },
+    {
+      question: "String values must be enclosed in?",
+      choices: ["Single or double quotation marks", "Curly brackets", "Parenthesis", "Square brackets"],
+      correctAnswer: "Single or double quotation marks"
+    },
+    {
+      question: "Which of the following methods removes the last element from an array and returns that element?",
+      choices: ["get()", "last()", "pop()", "None of the above"],
+      correctAnswer: "pop()"
+    },
+    {
+      question: "Which operator is used to assign a value to a variable?",
+      choices: ["*", "X", "==", "="],
+      correctAnswer: "="
+    },
+    {
+      question: "Which of these is NOT a JavaScript comparison operator?",
+      choices: ["==", "===", "==!", ">=", "?"],
+      correctAnswer: "==!"
+    },
+    {
+      question: "JavaScript uses the + operator for both addition and concatenation.  Which of the following statements is TRUE?",
+      choices: ["Numbers are concatenated. Strings are added.", "Numbers are added. Strings are concatenated.", "Both Numbers and Strings can be concatenated.", "Both Numbers and Strings can be added."],
+      correctAnswer: "Numbers are added. Strings are concatenated."
+    }, 
+    {
+      question: "Is the console a useful tool used in debugging of JavaScript?",
+      choices: ["Yes", "No", "That depends"],
+      correctAnswer: "Yes"
+    },  
+    {
+      question: "Which of the following String functions creates a string and displays it in a large font as if it were in a tag?",
+      choices: ["anchor()", "blink()", "strong()", "big()"],
+      correctAnswer: "big()"
+    },      
+    {
+      question: "How do you write an IF statement in JavaScript?",
+      choices: ["if (i==5)", "if i=5 then", "if i==5 then", "if i=5"],
+      correctAnswer: "if (i==5)"
+    }
+];
 
 startButton.addEventListener("click", function() {
-    setTime ();
+    clearIntroPara();
+    setTime();
     displayQuiz();
-
-    console.log("button is clicked")
 });
+
+function clearIntroPara() {
+        startScreen.setAttribute("class", "hide");
+}
 
 function setTime() {
     var timerInterval = setInterval(function() {
@@ -27,177 +91,116 @@ function setTime() {
       secondsLeft--;
 
       console.log("Time left " + secondsLeft);
-      if(secondsLeft === 0-1) {
+      if (secondsLeft === 0 -1) {
         clearInterval(timerInterval);
         sendMessage();
       }
     }, 1000);
-  }
-  
+}
+
+function displayQuiz(){
+        // Access the information in "quizQuestions"
+        // Pull the "question" string from the first Question & show as text on the page 
+        // Pull the "answers" array from the first Question & show as text within the choice buttons (5) on the page
+        // Allow the user to make a choice from the choice buttons (click)
+        // Identify if the user chose the "correctAnswer" or not & send relevant message
+        // Move to the next question
+        
+        questionScreen.setAttribute("class", "inline");
+        answerChoices.textContent = "";       
+        questionText.textContent = quizQuestions[currentQuestionIndex].question;
+        quizQuestions[currentQuestionIndex].choices.forEach(function (element){
+            var choice = document.createElement("button");
+            choice.textContent = element;
+            answerChoices.appendChild(choice);
+            choice.addEventListener("click", checkAnswer);
+            // showFeedback();
+        });
+}
+
+function showFeedback() {
+    console.log(this.textContent)
+    if (this.textContent === correctAnswer)
+    feedback.textContent = "Correct!";
+    else
+    feedback.textContent = "Wrong";
+};
+showFeedback()
+
+function checkAnswer() {
+    if (quizQuestions.length -1 === currentQuestionIndex){
+        showResults();
+    }
+    else {
+    currentQuestionIndex +=1;
+    displayQuiz();
+    }
+};
+checkAnswer()
+
+function showResults(){
+    quizResults.removeAttribute("class");
+    score.textContent = "Your score is " + correctAnswers;
+    questionScreen.setAttribute("class", "hide");
+}
+showResults()
+
 // Function to alert that the time is up &, therefore, the game is over:
 function sendMessage() {
     timerEl.textContent = "Time is up!";
-  }
-
-// Set variables:
-var currentQuestion = [];
-var questionNumber = [];
-var questions;
-var answers;
-var quizResults = document.getElementById('results');
-var chosenAnswers = document.querySelector('.chosen-answer');
-var currentQuestionIndex
+}
 
 
-  function displayQuiz(){
-      var output = [];
-      var answers = []; // to store the answers
+        // show options
+        // var answers = quiz.getquestionIndex().answers;
+        // for(var i = 0; i < choices.length; i++) {
+        //     var element = document.getElementById("chosenAnswer" + i);
+        //     element.innerText = choices[i];
+        //     chosenAnswer("btn" + i, choices[i]);
+        // }
+ 
+        // Add in:
+        // questionCounter++;
+
+         // e.preventDefault();
+
+// function getquestionIndex() {}
+// function isEnded(){}
+
+
+        // currentQuestion.display = quizQuestions[currentQuestionIndex].question;
+        // question[0].choices.forEach(function (element){
       
-// Need to clear the previous choices first
-
-        // for each question...
-        questionText.textContent = questions[currentQuestionIndex].title; // change title?
-        questions[0].choices.forEach(function (element){
-
-
-        })
-        questionChoices.textContent = "Answer1", "Answer2", "Answer3", "Answer4";
         
-        
-        quizQuestions.forEach(
-          (currentQuestion, questionNumber) => {
+        // quizQuestions.forEach(
+        //   (currentQuestion, currentQuestionIndex) => {
 
         // for (var quizQuestions = 0; quizQuestions < quizQuestions.length; quizQuestions++) {
-        // for (var i = 0; i < i.length; i++) {
-             
-            // submitButton.addEventListener("click", function(event) {
-            //     event.preventDefault();
+        
+        
+            // for (var i = 0; i < i.length; i++) {
 
-            // and for each available answer...
-            for(letter in currentQuestion.answers){
 
-  }
-});
-  }
-
+// Need to clear the previous choices first?
 
 //   submitButton.addEventListener("click", function() {
-//     if (count < 24) {
+//     if (count < 10) {
 //       count++;
 //       counter.textContent = count;
 //       localStorage.setItem("count", count);
 //     }
 //   });
 
-// To set up button for answers???
-// themeButtonEl.on('click', function () {
-//     if (isDark) {
-//       $('body').css({ 'background-color': '#d9e9e8', color: '#1a1a1a' });
-//       isDark = !isDark;
-//     } else {
-//       $('body').css({ 'background-color': '#1a1a1a', color: '#d9e9e8' });
-//       isDark = !isDark;
-//     }
-//     });
-
-
-
-
-
-
-
-
-function showResults(){}
-
-// On start, display first quiz question
-// buildQuiz();
-
 // At end, show results
 // submitButton.addEventListener('click', showResults);
 
 
+// Sources:
 // https://www.sitepoint.com/simple-javascript-quiz/#demo
+// https://webdevtrick.com/create-javascript-quiz-program/
 
-var quizQuestions = [
-    {
-      question: "Arrays in JavaScript can be used to store?",
-      answers: ["Numbers & Strings", "Booleans", "Other arrays", "All of the above"],
-      correctAnswer: "All of the above"
-    },
-    {
-      question: "Commonly used data types DO NOT include?",
-      answers: ["Strings", "Booleans", "Alerts", "Numbers"],
-      correctAnswer: "Alerts"
-    },
-    {
-      question: "String values must be enclosed in?",
-      answers: ["Single or double quotation marks", "Curly brackets", "Parenthesis", "Square brackets"],
-      correctAnswer: "Single or double quotation marks"
-    },
-    {
-      question: "Which of the following methods removes the last element from an array and returns that element?",
-      answers: ["get()", "last()", "pop()", "None of the above"],
-      correctAnswer: "pop()"
-    },
-    {
-      question: "Which operator is used to assign a value to a variable?",
-      answers: ["*", "X", "==", "="],
-      correctAnswer: "="
-    },
-    {
-      question: "Which of these is NOT a JavaScript comparison operator?",
-      answers: ["==", "===", "==!", ">=", "?"],
-      correctAnswer: "==!"
-    },
-    {
-      question: "JavaScript uses the + operator for both addition and concatenation.  Which of the following statements is TRUE?",
-      answers: ["Numbers are concatenated. Strings are added.", "Numbers are added. Strings are concatenated.", "Both Numbers and Strings can be concatenated.", "Both Numbers and Strings can be added."],
-      correctAnswer: "Numbers are added. Strings are concatenated."
-    }, 
-    {
-      question: "Is the console a useful tool used in debugging of JavaScript?",
-      answers: ["Yes", "No", "That depends"],
-      correctAnswer: "Yes"
-    },  
-    {
-      question: "Which of the following String functions creates a string and displays it in a large font as if it were in a tag?",
-      answers: ["anchor()", "blink()", "strong()", "big()"],
-      correctAnswer: "big()"
-    },      
-    {
-      question: "How do you write an IF statement in JavaScript?",
-      answers: ["if (i==5)", "if i=5 then", "if i==5 then", "if i=5"],
-      correctAnswer: "if (i==5)"
-    }
-];
-
-
-
-        // ...add an HTML radio button
-        // answers.push(
-        //   `<label>
-        //     <input type="radio" name="question${questionNumber}" value="${letter}">
-        //     ${letter} :
-        //     ${currentQuestion.answers[letter]}
-        //   </label>`
-        // );
-
-
-      // add this question and its answers to the output
-    //   output.push(
-    //     `<div class="question"> ${currentQuestion.question} </div>
-    //     <div class="answers"> ${answers.join('')} </div>`
-    //   );
-
-  
-
-  // finally combine our output list into one string of HTML and put it on the page
-//   quizContainer.innerHTML = output.join('');
-
-
-// quizQuestions.forEach( (currentQuestion, questionNumber) => {
-//     the code we want to run for each question goes here
-//   });
+// For modal:
+// https://www.youtube.com/watch?v=6ophW7Ask_0
 
 
 // WHEN I answer the question, I am given a comment saying whether or not I answered correctly (Correct or Incorrect)
@@ -205,15 +208,10 @@ var quizQuestions = [
 // Else if I answer incorrectly, the score (behind the scenes) remains where it is
 // THEN I am presented with the next question
 
-
 // This process continues until all the questions (10) are answered
-
-
 
 // WHEN all questions are answered or the timer reaches 0
 // THEN the game is over
-
-
 
 // WHEN the game is over, I go through to a page which explains the high scores
 // THEN I can save my initials and my score

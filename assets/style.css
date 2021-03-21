@@ -1,9 +1,30 @@
-*, *::before, *::after {
+*, 
+*::before, 
+*::after {
     box-sizing: border-box;
   }
   
+  #content2::before,
+  #content3::before,
+  #content4::before,
+  #content5::before,
+  #content6::before {
+    content: "\a";
+    white-space: pre;
+  }
+
+  #content1::after,
+  #content2::after,
+  #content3::after,
+  #content4::after,
+  #content5::after,
+  #content6::after {
+    content: "\a";
+    white-space: pre;
+}
+
   html {
-    font-size: 16px;
+    font-size: 15px;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   }
   
@@ -18,7 +39,8 @@
     display: block;
     margin: 80px auto;
     text-align: center;
-    font-size: 25px;
+    font-size: 20px;
+    line-height: 1.6;
     box-shadow: 0 4px 8px 0 #000000;
     transition: 0.3s;
     width: 60vw;
@@ -36,13 +58,13 @@
   #start {
     border-radius: 4px;
     border-style: none;
-    box-shadow: #000000 2px 2px 2px 2px inset;
+    box-shadow: #000000 2px inset;
     color: #000000;
     background-color: #6495ED;
     cursor: pointer;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     font-size: 30px;
-    padding: 20px;
+    padding: 1em 2em;
     margin-bottom: 60px;;
   }
 
@@ -50,11 +72,18 @@
     display: none;
 }
 
+.content {
+    display: block;
+}
 
-/* Get a multiple choice style from Bootstrap? */
-
-.btn-check
-#btn-check-2-outlined
-.btn btn-outline-secondary
-
-
+.buttons {
+    /* margin-top: 30px;
+    background-color: #1D3C6A;
+    font-size: 20px;
+    color: #fff;
+    border: 1px solid #1D3C6A;
+    border-radius: 2px;
+    margin: 10px 40px 10px 0px;
+    padding: 10px 10px; */
+    display: none;
+}
