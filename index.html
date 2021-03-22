@@ -14,7 +14,7 @@
       <div id="start-screen">
       <h1>Coding Quiz Challenge</h1>
       <span id="content1" class="content">Test your JavaScript skills with this mini Coding Quiz Challenge.</span>
-      <span id="content2" class="content">10 questions only with a 30-second time limit to keep you moving.</span>
+      <span id="content2" class="content">10 questions only with a 25-second time limit to keep you moving.</span>
       <span id="content3" class="content">Click on the box showing your chosen answer.  You will receive 1 point for each correct answer.</span>
       <span id="content4" class="content">At the end of the Quiz, your total score will be displayed and you can record your initials if you receive a high score.</span>
       <span id="content5" class="content">The maximum score is 10 points.</span>
@@ -27,18 +27,18 @@
         <form method="multiple-choice">
           <div id="question-screen" class="hide">
             <div id="question-box"></div>
-            <div class="timer hide">Time left: <span id="time">10</span></div>
+            <div class="timer hide">Time left: <span id="time">25</span></div>
             <div id="question-text"></div>
             <div id="answers-text" class="button" class="hide">
-            <div id="result-feedback"></div>
+            <div id="result-feedback" class="hide">Your choice was<span id="feedback"></span></div>
             </div>
           </div>
         </form>
 
         <div id="results-screen" class="hide">
-          <div id="score"></div>
-          <div id="msg"></div>
-        </div>
+          <div id="score" class="hide"></div>
+          <div id="msg" class="hide"></div>
+        </div>        
       
     </div>
   </div>

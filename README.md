@@ -1,31 +1,30 @@
-# coding-quiz
-A fun basic coding quiz containing 10 multiple choice questions.
+# JavaScript Coding Quiz
+A fun basic JavaScript coding quiz containing 10 multiple choice questions with a 25-second time limit.
 
 
-To help familiarize you with these tests and allow you to use the skills covered in this unit, this week’s homework invites you to build a timed coding quiz with multiple choice questions. This app will run in the browser and will feature dynamically updated HTML and CSS powered by JavaScript code that you write. It will have a clean, polished, and responsive user interface. 
+# Steps
+1. The opening screen has a paragraph explaining the rules of the quiz and has a large START button.
+2. The user clicks on the START button to begin the quiz.
+3. The timer begins and the first question is displayed. 
+4. The user clicks on the box showing their chosen answer.
+5. A response is shown to commuicate whether or not the user chose the correct answer, then the next question is displayed.
+6. The user works through the remaining multiple choice questions (10 in total).
+7. The user receives 1 point for each correct answer.  (The maximum score is 10 points.)
+8. At the end of the Quiz, the total score will be displayed.
+9. The user has the option of recording his/her initials against their score and comparing with their peers.  
 
-This week’s coursework will equip you with all the skills you need to succeed in this assignment.
 
-## User Story
+## Deployment
 
-```
-AS A coding boot camp student
-I WANT to take a timed quiz on JavaScript fundamentals that stores high scores
-SO THAT I can gauge my progress compared to my peers
-```
+* Application deployed at live URL:
 
-## Acceptance Criteria
+    https://rachel-brain.github.io/coding-quiz
 
-```
-GIVEN I am taking a code quiz
-WHEN I click the start button
-THEN a timer starts and I am presented with a question
-WHEN I answer a question
-THEN I am presented with another question
-WHEN I answer a question incorrectly
-THEN time is subtracted from the clock
-WHEN all questions are answered or the timer reaches 0
-THEN the game is over
-WHEN the game is over
-THEN I can save my initials and my score
-```
+* Application GitHub repository URL:
+
+    https://github.com/rachel-brain/coding-quiz
+
+
+## Screenshot
+
+See images file: ./images/Screenshot of JS coding Quiz.JPG"

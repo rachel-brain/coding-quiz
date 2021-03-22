@@ -1,24 +1,26 @@
-// Remove some of these variables if they are not needed:
+// Remove the variables that are not needed:
 var startButton = document.getElementById("start");
 var questionText = document.querySelector("#question-text");
 var answerChoices = document.querySelector("#answers-text");
-var feedback = document.getElementById("msg");
+var questionFeedback = document.getElementById("result-feedback");
 var timerEl = document.querySelector(".timer");
 var questionCounter = 0;
-var secondsLeft = 30;
+var secondsLeft = 25;
 
 var question = "";
 var currentQuestionIndex = 0;
 var questionCounter;
 var questionBox = document.querySelector("#question-box");
 var choices = [];
-
+var chosenAnswer;
 var correctAnswer;
-var chosenAnswer = document.querySelector(".chosen-answer");
+var currentAnswer;
 var startScreen = document.getElementById("start-screen");
 var questionScreen = document.getElementById("question-screen");
 var resultsScreen = document.getElementById("results-screen");
-var score = document.getElementById("score");
+var finalScore = document.getElementById("score");
+var finalMessage = document.getElementById("msg");
+var totalCorrect;
 
 
 var quizQuestions = [
@@ -90,7 +92,7 @@ function setTime() {
       document.querySelector("#time").innerText=secondsLeft;
       secondsLeft--;
 
-      console.log("Time left " + secondsLeft);
+      console.log("Time left " + secondsLeft)
       if (secondsLeft === 0 -1) {
         clearInterval(timerInterval);
         sendMessage();
@@ -98,15 +100,8 @@ function setTime() {
     }, 1000);
 }
 
-function displayQuiz(){
-        // Access the information in "quizQuestions"
-        // Pull the "question" string from the first Question & show as text on the page 
-        // Pull the "answers" array from the first Question & show as text within the choice buttons (5) on the page
-        // Allow the user to make a choice from the choice buttons (click)
-        // Identify if the user chose the "correctAnswer" or not & send relevant message
-        // Move to the next question
-        
-        questionScreen.setAttribute("class", "inline");
+function displayQuiz(){      
+        questionScreen.removeAttribute("class");
         answerChoices.textContent = "";       
         questionText.textContent = quizQuestions[currentQuestionIndex].question;
         quizQuestions[currentQuestionIndex].choices.forEach(function (element){
@@ -114,106 +109,68 @@ function displayQuiz(){
             choice.textContent = element;
             answerChoices.appendChild(choice);
             choice.addEventListener("click", checkAnswer);
-            // showFeedback();
         });
 }
 
-function showFeedback() {
-    console.log(this.textContent)
-    if (this.textContent === correctAnswer)
-    feedback.textContent = "Correct!";
-    else
-    feedback.textContent = "Wrong";
-};
-showFeedback()
-
+// Correct to display the message onto the webpage re. whether or not the user chose the "correctAnswer".
 function checkAnswer() {
+    console.log(this.textContent)
+    
+    var chosenAnswer = this.textContent;
+    var correctAnswer = quizQuestions[currentQuestionIndex].correctAnswer;    
+    feedback = document.getElementById("#feedback");
+
+    if (chosenAnswer === correctAnswer){
+        questionFeedback.textContent = " correct!";
+        console.log(questionFeedback.textContent)
+        totalCorrect += 1;
+    } 
+    else {
+        questionFeedback.textContent = " wrong.";
+        console.log(questionFeedback.textContent)
+    }
+
     if (quizQuestions.length -1 === currentQuestionIndex){
         showResults();
     }
     else {
-    currentQuestionIndex +=1;
-    displayQuiz();
+        currentQuestionIndex +=1;
+        displayQuiz();
     }
-};
+    questionFeedback.removeAttribute("class");
+}
 checkAnswer()
 
+// Correct to display the results screen showing the final score.
 function showResults(){
-    quizResults.removeAttribute("class");
-    score.textContent = "Your score is " + correctAnswers;
     questionScreen.setAttribute("class", "hide");
+    finalMessage.removeAttribute("class");
+    finalScore.removeAttribute("class");
+    finalScore.textContent = "Your final score is " + totalCorrect + "out of a total of 10.";
 }
 showResults()
 
-// Function to alert that the time is up &, therefore, the game is over:
 function sendMessage() {
     timerEl.textContent = "Time is up!";
+    showResults();
 }
 
+// When the game is over, the user goes through to another screen explaining the high scores
+// If the user confirms, they link to a new page (new html) where they can save their initials alongside their score
+// Then, the function endGame shows the high scores page
+function endGame() {
+    // Go to high scores screen
+    // Link to a new page (new html) for inputting initials
+    // Then the high scores page is displayed
 
-        // show options
-        // var answers = quiz.getquestionIndex().answers;
-        // for(var i = 0; i < choices.length; i++) {
-        //     var element = document.getElementById("chosenAnswer" + i);
-        //     element.innerText = choices[i];
-        //     chosenAnswer("btn" + i, choices[i]);
-        // }
- 
-        // Add in:
-        // questionCounter++;
+    // var highScore = document.createElement("button");
+    // highScore.addEventListener("dblclick", top.location.href = "http://myscoreishigherthanyours.com");
+}
+endGame()
 
-         // e.preventDefault();
-
-// function getquestionIndex() {}
-// function isEnded(){}
-
-
-        // currentQuestion.display = quizQuestions[currentQuestionIndex].question;
-        // question[0].choices.forEach(function (element){
-      
-        
-        // quizQuestions.forEach(
-        //   (currentQuestion, currentQuestionIndex) => {
-
-        // for (var quizQuestions = 0; quizQuestions < quizQuestions.length; quizQuestions++) {
-        
-        
-            // for (var i = 0; i < i.length; i++) {
-
-
-// Need to clear the previous choices first?
-
-//   submitButton.addEventListener("click", function() {
-//     if (count < 10) {
-//       count++;
-//       counter.textContent = count;
-//       localStorage.setItem("count", count);
-//     }
-//   });
-
-// At end, show results
-// submitButton.addEventListener('click', showResults);
 
 
 // Sources:
 // https://www.sitepoint.com/simple-javascript-quiz/#demo
 // https://webdevtrick.com/create-javascript-quiz-program/
-
-// For modal:
 // https://www.youtube.com/watch?v=6ophW7Ask_0
-
-
-// WHEN I answer the question, I am given a comment saying whether or not I answered correctly (Correct or Incorrect)
-// If I answer correctly, the score (behind the scenes) adds 1 from 0
-// Else if I answer incorrectly, the score (behind the scenes) remains where it is
-// THEN I am presented with the next question
-
-// This process continues until all the questions (10) are answered
-
-// WHEN all questions are answered or the timer reaches 0
-// THEN the game is over
-
-// WHEN the game is over, I go through to a page which explains the high scores
-// THEN I can save my initials and my score
-// Link to as new page on a new html
-// As a function endGame() then show the high scores page
